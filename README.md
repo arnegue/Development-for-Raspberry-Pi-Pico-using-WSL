@@ -10,9 +10,14 @@ This repository shows:
 * Transfer it on your Pico
 * Debug it (currently i see no other way but doing it with another Raspberry Pi (non-Pico)
 
+The content of this repository is only example code. If you want to get this running instead of following all these steps you also have to get the pico-sdk-submodule with:
+
+* `git submodule init` 
+* `git submodule update`
+
 # Setup SDK
-* Follow all steps in step 2 of the [manual](https://datasheets.raspberrypi.org/pico/getting-started-with-pico.pdf).
-* If your cmake-version is still < 3.13 (check with `cmake --version`). Follow these steps:
+* In WSL follow all steps in step 2 of the [manual](https://datasheets.raspberrypi.org/pico/getting-started-with-pico.pdf).
+* If your cmake-version is still < 3.13 (check with `cmake --version`). Follow these steps (it will install CMake 3.19, but that works too):
     1. `wget http://www.cmake.org/files/v3.19/cmake-3.19.4.tar.gz`
     2. `tar -xvzf cmake-3.19.4.tar.gz`
     3. `./configure`
@@ -22,6 +27,8 @@ This repository shows:
 # Make it blink (local compiling)
 ## Compile
 Follow step 3.1 of the manual
+
+> You may come into the situation that Python3 is not installed and therefore won't compile. To install it run `sudo apt install python3`
 
 ## Copy
 To finally copy the binary to your Raspberry Pi Pico, you have to copy `blink.uf2` to a directory Windows can access.
@@ -63,12 +70,14 @@ To setup a SSH-Server on your WSL, you need to edit the SSH-Daemon-configuration
         * The other ones should be detected without a problem.
         * There might be a warning that currently no cmake 3.19.4 is supported, it does work though
         * GDB is not needed since we do not debug the program via WSL
+    * After adding your ToolChain, ensure that in the ToolChains-List your WSL-Toolchain is the first one
 * File -> Settings -> Build, Execution, Development -> CMake
     * \+ 
     * Set the name as you want 
     * Build Type: Debug
     * Environment: `PICO_SDK_PATH=<sdk-path of step 2 in manual>` (mentioned in "Setup SDK", mine was placed in `/home/pi/pico/pico-sdk`)
-* Edit CMakeList.txt
+    * After adding your CMake-Profile, ensure that in the CMake-Profile-list your profile is the first one in the list
+* Edit CMakeList.txt (see example in repository)
     * Include SDK: `include(pico-sdk/pico_sdk_init.cmake)`
     * Initialize it: `pico_sdk_init()`
     * Link SDK to your project: `target_link_libraries(pico_example pico_stdlib)`
