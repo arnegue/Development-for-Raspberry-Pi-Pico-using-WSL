@@ -8,7 +8,7 @@ This repository shows:
 * Develop a new project
 * Remote-compile it on your WSL (not Raspberry)
 * Transfer it on your Pico
-* Debug it (currently i see no other way but doing it with another Raspberry Pi (non-Pico)
+* TODO: Debug it (currently i see no other way but doing it with another Raspberry Pi (non-Pico)
 
 The content of this repository is only example code. If you want to get this running instead of following all these steps you also have to get the pico-sdk-submodule with:
 
@@ -74,7 +74,7 @@ To setup a SSH-Server on your WSL, you need to edit the SSH-Daemon-configuration
 * File -> Settings -> Build, Execution, Development -> CMake
     * \+ 
     * Set the name as you want 
-    * Build Type: Debug
+    * Build Type: Debug (will be needed if we want to debug is with another Raspberry Pi (non-Pico))
     * Environment: `PICO_SDK_PATH=<sdk-path of step 2 in manual>` (mentioned in "Setup SDK", mine was placed in `/home/pi/pico/pico-sdk`)
     * After adding your CMake-Profile, ensure that in the CMake-Profile-list your profile is the first one in the list
 * Edit CMakeList.txt (see example in repository)
